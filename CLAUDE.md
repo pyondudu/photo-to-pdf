@@ -23,11 +23,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 網址：https://pyondudu.github.io/photo-to-pdf/ （repo：https://github.com/pyondudu/photo-to-pdf ，**public**）
 - push 到 `main` 後，`.github/workflows/deploy.yml` 會自動 build 並部署（約 1 分鐘），可用 `gh run watch` 確認。手機上的 PWA 會自動更新（可能要關掉 App 重開一兩次）。
 - repo 是公開的：`.gitignore` 已排除根目錄的 `*.jpg`、`*.pdf`（參考截圖、報價單）。commit 前用 `git status` 確認沒有敏感檔案。
+- 同事已在正式使用（Android + iPhone 都測過）：push 到 `main` 就等於更新給所有人，push 前要先在電腦端測過。
+- 使用者從 Windows 拖曳檔案進 VM 時，VMware 會在 `~/.cache/vmware/drag_and_drop/` 留副本；刪除敏感檔案時要一併提醒清理（2026-10-06 已清空過一次）。
 - git 身分：名字 `Forever1407`、email 用 GitHub noreply 地址（不公開使用者的 Gmail）。
 
 ## 指令
 
-- `npm run dev`：開發用 HTTPS server（已加 `--host`，手機可用區網 IP 連入）
+- `npm run dev`：開發用 HTTPS server（已加 `--host`；但這台 VM 是 NAT，手機連不到，實機測試用 GitHub Pages）
 - `npm run build` / `npm run preview`：正式版建置與預覽
 - `node scripts/make-icons.mjs`：重新產生 `public/` 的 PWA 圖示
 
