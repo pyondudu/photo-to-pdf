@@ -9,7 +9,7 @@ disable-model-invocation: true
 1. **檢查專案**：確認 `package.json` 存在。若沒有 `node_modules`，先說明並執行 `npm install`。
 2. **檢查 HTTPS**：「加到主畫面」和離線使用需要 HTTPS。確認 `vite.config.js` 有啟用 `@vitejs/plugin-basic-ssl`（`plugins: [basicSsl()]`）。沒有的話，說明原因並詢問是否要加入（`npm install -D @vitejs/plugin-basic-ssl`）。
    - **檢查是否為虛擬機**：執行 `systemd-detect-virt` 和 `ip -4 route`。如果是 VMware 且使用 NAT（IP 是 VMware 的內部網段），手機連不到這台電腦，**不要啟動 server**：
-     - 已經部署到 GitHub Pages（看 PROGRESS.md）→ 請使用者用手機打開該網址，直接跳到步驟 5。
+     - 已經部署到 GitHub Pages → 確認最新改動已 push 且 `gh run list` 部署成功，請使用者用手機打開 https://pyondudu.github.io/photo-to-pdf/ （瀏覽器重新整理；主畫面 App 要完全關掉再開），直接跳到步驟 5。
      - 還沒部署 → 說明原因，建議先完成 PROGRESS.md 裡的部署步驟（或請使用者把 VMware 網路改成橋接）。
 3. **啟動 server**：用 Bash 的 `run_in_background` 執行 `npm run dev`，從輸出找出 `Network: https://<區網IP>:5173/` 網址。如果已經有 server 在跑，直接沿用。
 4. **引導使用者連線**（用條列、白話說明）：
@@ -27,5 +27,7 @@ disable-model-invocation: true
    - [ ] 濾鏡（增強/黑白）效果正常
    - [ ] 輸出的 PDF 每頁都是 A4、頁數與順序正確
    - [ ] PDF 檔案大小合理（例如每頁不超過約 500KB）
-   - [ ] 分享 / 下載 PDF 成功（iPhone 特別確認）
+   - [ ] 可以修改檔名，分享（例如 LINE）與下載後的檔名正確
+   - [ ] 分享 / 下載 PDF 成功（iPhone 特別確認「儲存到檔案」）
+   - [ ] 加到主畫面（Android Chrome：⋮ →「安裝應用程式」；iPhone Safari：分享 →「加入主畫面」），從主畫面打開是全螢幕
 6. 測完後提醒使用者：要停止 server 時告訴你，你會把背景程序關掉。

@@ -15,6 +15,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 流程：拍照（可連拍多頁）→ 自動偵測文件四角（可手動微調）→ 透視校正拉平 → 增強/黑白濾鏡 → 合併輸出成一個 PDF。
 只輸出 PDF，不做 JPG 輸出。`172942_0.jpg`、`172943_0.jpg` 是掃描全能王的參考截圖（含 App 介面），拿來測偵測時要先裁掉上下的黑色介面，否則會框到相機預覽區。
 
+## 部署
+
+- 網址：https://pyondudu.github.io/photo-to-pdf/ （repo：https://github.com/pyondudu/photo-to-pdf ，**public**）
+- push 到 `main` 後，`.github/workflows/deploy.yml` 會自動 build 並部署（約 1 分鐘），可用 `gh run watch` 確認。手機上的 PWA 會自動更新（可能要關掉 App 重開一兩次）。
+- repo 是公開的：`.gitignore` 已排除根目錄的 `*.jpg`、`*.pdf`（參考截圖、報價單）。commit 前用 `git status` 確認沒有敏感檔案。
+- git 身分：名字 `Forever1407`、email 用 GitHub noreply 地址（不公開使用者的 Gmail）。
+
 ## 指令
 
 - `npm run dev`：開發用 HTTPS server（已加 `--host`，手機可用區網 IP 連入）
@@ -32,6 +39,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 輸出規則
 
+- 檔名：「PDF 已完成」畫面可直接輸入檔名（預設 `掃描_日期_時間`），由 `toPdfFilename()`（`src/pdf.js`）自動補 `.pdf` 並過濾不合法字元。
 - 預設壓縮：頁面影像以 canvas 轉 JPEG（quality 約 0.7）、長邊上限約 2000px 再放入 PDF，避免檔案過大。
 - 下載：iOS Safari 對 `<a download>` 支援不穩，優先用 `navigator.share({ files })`，不支援時才 fallback 為下載連結。`share()` 必須在點擊事件中直接呼叫，所以先產生 PDF，再讓使用者按「分享 / 儲存」。
 
@@ -46,3 +54,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 使用者是程式新手：每次說明要一步步來，包含要執行的指令、在哪裡執行、預期看到什麼。
 - 改動 UI 或影像處理後，提醒使用者用 `/phone-test` 在真實手機上驗證（Android 與 iPhone 都要）。
+- 需要輸入密碼或互動選擇的指令（`sudo`、`gh auth login`）**不能用 `! 指令`**（拿不到終端機），要請使用者另開終端機（`Ctrl+Alt+T`）執行。

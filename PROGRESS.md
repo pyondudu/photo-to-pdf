@@ -9,7 +9,7 @@
 - 電腦端測試通過（Playwright 模擬手機）：2 頁 A4 PDF，約 141 KB
 - 手機實測（2026-10-06）：拍 2 頁 → 分享到 LINE、下載，手機與電腦都能正常開啟
 - 「PDF 已完成」畫面可直接輸入檔名（預設 `掃描_日期_時間`，自動補 `.pdf`、過濾不合法字元）
-- Android 實測通過（2026-10-06）：改檔名、分享到 LINE、下載都正常
+- Android 實測通過（2026-10-06）：改檔名、分享到 LINE、下載、「安裝應用程式」到主畫面都正常
 
 ## 更新方式
 
@@ -23,7 +23,7 @@
 - [x] 4. `git init` 並做第一次 commit（`.gitignore` 已排除 node_modules、dist、根目錄的 jpg 截圖與報價單 PDF）
 - [x] 5. 建立 public repo：https://github.com/pyondudu/photo-to-pdf（已部署到 https://pyondudu.github.io/photo-to-pdf/ ）
 - [x] 6. 加上 GitHub Actions workflow（`.github/workflows/deploy.yml`），自動 build 並部署 `dist/`（`vite.config.js` 已設定 `base: "./"`）
-- [ ] 7. （Android ✅；iPhone 與「加到主畫面」待測，使用者正請同事用 iPhone 測試）手機打開 https://pyondudu.github.io/photo-to-pdf/ ，照 `/phone-test` 的清單測試（Android + iPhone），並測「加到主畫面」
+- [ ] 7. （Android ✅ 含安裝到主畫面；iPhone 待測，使用者正請同事測試）手機打開 https://pyondudu.github.io/photo-to-pdf/ ，照 `/phone-test` 的清單測試（Android + iPhone），並測「加到主畫面」
 
 ## 之後的待辦
 
