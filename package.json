@@ -1,0 +1,23 @@
+{
+  "name": "photo-to-pdf",
+  "version": "1.0.0",
+  "description": "手機文件掃描 PWA：拍照 → 拉平 → A4 PDF",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "format": "prettier --write ."
+  },
+  "type": "module",
+  "dependencies": {
+    "@techstark/opencv-js": "^5.0.0-release.1",
+    "jspdf": "^4.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "prettier": "^3.9.9",
+    "vite": "^8.3.2",
+    "vite-plugin-pwa": "^2.0.0"
+  },
+  "private": true
+}

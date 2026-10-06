@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#111418" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="掃描" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>文件掃描</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>文件掃描</h1>
+      <div class="toolbar" id="toolbar" hidden>
+        <select id="filterAll" aria-label="全部頁面的濾鏡"></select>
+        <button id="clearAll" class="btn small ghost">全部清除</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="empty" class="empty">
+        <p class="empty-title">還沒有頁面</p>
+        <p>按下方「拍照」拍下文件，可以連續拍很多頁，最後合成一個 PDF。</p>
+      </section>
+      <ol id="pages" class="pages"></ol>
+    </main>
+
+    <footer class="actions">
+      <label class="btn">
+        相簿
+        <input
+          id="gallery"
+          class="visually-hidden"
+          type="file"
+          accept="image/*"
+          multiple
+        />
+      </label>
+      <label class="btn primary">
+        拍照
+        <input
+          id="camera"
+          class="visually-hidden"
+          type="file"
+          accept="image/*"
+          capture="environment"
+        />
+      </label>
+      <button id="makePdf" class="btn accent" disabled>產生 PDF</button>
+    </footer>
+
+    <section id="editor" class="overlay editor" hidden>
+      <p class="editor-hint">拖曳四個圓點，讓框貼齊文件邊緣</p>
+      <div id="stage" class="stage">
+        <div id="stageFrame" class="stage-frame">
+          <canvas id="stageCanvas"></canvas>
+          <svg class="stage-svg"><polygon id="stagePolygon" /></svg>
+          <div class="handle"></div>
+          <div class="handle"></div>
+          <div class="handle"></div>
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="editor-actions">
+        <button id="editorCancel" class="btn ghost">取消</button>
+        <button id="editorFull" class="btn ghost">整張照片</button>
+        <button id="editorOk" class="btn primary">確定</button>
+      </div>
+    </section>
+
+    <section id="result" class="overlay sheet-backdrop" hidden>
+      <div class="sheet">
+        <p class="sheet-title">PDF 已完成</p>
+        <p id="resultInfo" class="sheet-info"></p>
+        <div class="sheet-actions">
+          <button id="resultShare" class="btn primary">分享 / 儲存</button>
+          <button id="resultDownload" class="btn">下載</button>
+          <button id="resultClose" class="btn ghost">關閉</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="busy" class="overlay busy" hidden>
+      <div class="spinner"></div>
+      <p id="busyText"></p>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
