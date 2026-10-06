@@ -310,6 +310,46 @@ main {
   word-break: break-all;
 }
 
+.field {
+  display: block;
+  margin: 0 0 16px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field-row input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  /* 16px 以上 iOS 才不會在聚焦時自動放大畫面 */
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.field-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field-suffix {
+  color: var(--muted);
+}
+
 .sheet-actions {
   display: grid;
   gap: 10px;

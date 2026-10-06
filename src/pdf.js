@@ -26,10 +26,21 @@ export async function buildPdf(pages) {
   return doc.output("blob");
 }
 
-export function pdfFilename(date = new Date()) {
+// 預設檔名（不含 .pdf）
+export function defaultPdfName(date = new Date()) {
   const pad = (n) => String(n).padStart(2, "0");
   const d = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-  return `掃描_${d}_${pad(date.getHours())}${pad(date.getMinutes())}.pdf`;
+  return `掃描_${d}_${pad(date.getHours())}${pad(date.getMinutes())}`;
+}
+
+// 使用者輸入的檔名 → 安全的 .pdf 檔名；空白時用預設檔名
+export function toPdfFilename(name, fallback = defaultPdfName()) {
+  const clean = name
+    .replace(/\.pdf$/i, "")
+    .replace(/[\\/:*?"<>|\u0000-\u001f]/g, "_") // 各系統不允許的字元
+    .trim()
+    .replace(/^\.+/, "");
+  return `${clean || fallback}.pdf`;
 }
 
 // 必須在使用者點擊時直接呼叫（iOS 要求分享由點擊觸發）

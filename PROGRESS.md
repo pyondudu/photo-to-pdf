@@ -7,6 +7,8 @@
 - `/init` 設定：`CLAUDE.md`、`/phone-test` skill、Prettier 自動排版 hook（`.claude/settings.json`）
 - 第一版 App：拍照／相簿 → 自動偵測四角（可拖曳調整）→ 拉平 → 濾鏡（原色／增強／灰階／黑白）→ A4 PDF → 分享／下載
 - 電腦端測試通過（Playwright 模擬手機）：2 頁 A4 PDF，約 141 KB
+- 手機實測（2026-10-06）：拍 2 頁 → 分享到 LINE、下載，手機與電腦都能正常開啟
+- 「PDF 已完成」畫面可直接輸入檔名（預設 `掃描_日期_時間`，自動補 `.pdf`、過濾不合法字元）
 
 ## 更新方式
 

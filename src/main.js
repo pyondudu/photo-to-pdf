@@ -5,7 +5,8 @@ import { FILTERS, applyFilter } from "./filters.js";
 import { editCorners } from "./cornerEditor.js";
 import {
   buildPdf,
-  pdfFilename,
+  defaultPdfName,
+  toPdfFilename,
   sharePdf,
   downloadPdf,
   formatSize,
@@ -195,10 +196,15 @@ let lastPdf = null;
 async function makePdf() {
   const blob = await withBusy("產生 PDF 中…", () => buildPdf(pages));
   if (!blob) return;
-  lastPdf = { blob, filename: pdfFilename() };
-  $("#resultInfo").textContent =
-    `${lastPdf.filename}・${pages.length} 頁・${formatSize(blob.size)}`;
+  lastPdf = { blob, defaultName: defaultPdfName() };
+  $("#resultInfo").textContent = `${pages.length} 頁・${formatSize(blob.size)}`;
+  $("#resultName").value = lastPdf.defaultName;
   $("#result").hidden = false;
+}
+
+// 分享 / 下載時才讀取檔名，使用者可以先修改
+function currentFilename() {
+  return toPdfFilename($("#resultName").value, lastPdf.defaultName);
 }
 
 // ---------- 事件 ----------
@@ -229,16 +235,23 @@ $("#clearAll").onclick = () => {
 $("#makePdf").onclick = makePdf;
 
 $("#resultShare").onclick = async () => {
+  const filename = currentFilename();
   try {
-    const shared = await sharePdf(lastPdf.blob, lastPdf.filename);
-    if (!shared) downloadPdf(lastPdf.blob, lastPdf.filename);
+    const shared = await sharePdf(lastPdf.blob, filename);
+    if (!shared) downloadPdf(lastPdf.blob, filename);
   } catch (err) {
     console.error(err);
-    downloadPdf(lastPdf.blob, lastPdf.filename);
+    downloadPdf(lastPdf.blob, filename);
   }
 };
 $("#resultDownload").onclick = () =>
-  downloadPdf(lastPdf.blob, lastPdf.filename);
+  downloadPdf(lastPdf.blob, currentFilename());
+// 點進檔名欄就全選，直接打字即可取代預設檔名
+$("#resultName").onfocus = (e) => e.target.select();
+// 按鍵盤的「完成」收起鍵盤
+$("#resultName").onkeydown = (e) => {
+  if (e.key === "Enter") e.target.blur();
+};
 $("#resultClose").onclick = () => ($("#result").hidden = true);
 
 // 離開前提醒（避免誤關分頁丟失已拍的頁面）
