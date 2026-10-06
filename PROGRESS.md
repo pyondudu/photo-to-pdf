@@ -8,10 +8,9 @@
 - 第一版 App：拍照／相簿 → 自動偵測四角（可拖曳調整）→ 拉平 → 濾鏡（原色／增強／灰階／黑白）→ A4 PDF → 分享／下載
 - 電腦端測試通過（Playwright 模擬手機）：2 頁 A4 PDF，約 141 KB
 
-## 卡住的地方
+## 更新方式
 
-開發機是 VMware 虛擬機（NAT 網路），手機連不到這台電腦的 dev server，所以還沒在真實手機上測過。
-→ 決定改用 **GitHub Pages** 部署，拿到固定的 https 網址，給手機測試和同事使用。
+改完程式後 `git commit` + `git push`，GitHub Actions 會自動重新部署（約 1 分鐘）。手機上的 PWA 會自動更新。
 
 ## 下一步：部署到 GitHub Pages
 
@@ -19,9 +18,9 @@
 - [x] 2. 設定 git 的使用者名稱與 email（名字 `Forever1407`；email 用 GitHub noreply 地址，不公開 Gmail）
 - [x] 3. 登入 GitHub 帳號 `pyondudu`（`gh auth login` 也要在另開的終端機執行）
 - [x] 4. `git init` 並做第一次 commit（`.gitignore` 已排除 node_modules、dist、根目錄的 jpg 截圖與報價單 PDF）
-- [ ] 5. 用 `gh repo create` 建立 repo（免費帳號的 GitHub Pages 需要 public repo，要先跟使用者說明）
+- [x] 5. 建立 public repo：https://github.com/pyondudu/photo-to-pdf（已部署到 https://pyondudu.github.io/photo-to-pdf/ ）
 - [x] 6. 加上 GitHub Actions workflow（`.github/workflows/deploy.yml`），自動 build 並部署 `dist/`（`vite.config.js` 已設定 `base: "./"`）
-- [ ] 7. 手機打開 `https://<帳號>.github.io/<repo>/`，照 `/phone-test` 的清單測試（Android + iPhone），並測「加到主畫面」
+- [ ] 7. 手機打開 https://pyondudu.github.io/photo-to-pdf/ ，照 `/phone-test` 的清單測試（Android + iPhone），並測「加到主畫面」
 
 ## 之後的待辦
 
